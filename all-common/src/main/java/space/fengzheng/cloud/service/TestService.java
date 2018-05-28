@@ -8,4 +8,8 @@ import space.fengzheng.cloud.fallback.TestServiceFallBack;
 public interface TestService {
     @GetMapping("/list")
     String testList();
+    @GetMapping("/exception")
+    String exception();
+    @GetMapping("/timeout")
+    String timeout();
 }

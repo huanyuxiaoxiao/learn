@@ -18,4 +18,15 @@ public class TestConsumerController {
         log.info("receive");
         return testService.testList();
     }
+    @GetMapping("exception")
+    public String exception(){
+        log.info("receive");
+        return testService.exception();
+    }
+
+    @GetMapping("timeout")
+    public String timeout(){
+        log.info("receive");
+        return testService.timeout();
+    }
 }
