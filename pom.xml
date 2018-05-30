@@ -10,6 +10,7 @@
         <module>test-server</module>
         <module>all-common</module>
         <module>test-consumer</module>
+        <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
 
