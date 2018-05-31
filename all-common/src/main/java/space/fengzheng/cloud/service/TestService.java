@@ -4,13 +4,16 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import space.fengzheng.cloud.config.RetryerConfig;
 import space.fengzheng.cloud.fallback.TestServiceFallBack;
+import space.fengzheng.cloud.vo.UserVo;
 
-@FeignClient(value = "TEST-SERVER",fallback = TestServiceFallBack.class,configuration = RetryerConfig.class)
+@FeignClient(value = "TEST-SERVER", fallback = TestServiceFallBack.class, configuration = RetryerConfig.class)
 public interface TestService {
     @GetMapping("/list")
-    String testList();
+    UserVo testList();
+
     @GetMapping("/exception")
-    String exception();
+    UserVo exception();
+
     @GetMapping("/timeout")
-    String timeout();
+    UserVo timeout();
 }

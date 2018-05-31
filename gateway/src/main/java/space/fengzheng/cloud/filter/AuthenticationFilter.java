@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 @Configuration
-public class AuthenticationFilter extends ZuulFilter{
+public class AuthenticationFilter extends ZuulFilter {
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
      * "route" for routing to an origin, "post" for post-routing filters, "error" for error handling.

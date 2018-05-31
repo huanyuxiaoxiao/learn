@@ -3,23 +3,24 @@ package space.fengzheng.cloud.fallback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import space.fengzheng.cloud.service.TestService;
+import space.fengzheng.cloud.vo.UserVo;
 
 @Slf4j
 @Service
 public class TestServiceFallBack implements TestService {
     @Override
-    public String testList() {
-        return new String("查询异常!");
+    public UserVo testList() {
+        return new UserVo();
     }
 
     @Override
-    public String exception() {
-        return new String("查询异常!");
+    public UserVo exception() {
+        return new UserVo();
     }
 
     @Override
-    public String timeout() {
+    public UserVo timeout() {
         log.info("timeout");
-        return new String("查询异常!");
+        return new UserVo();
     }
 }

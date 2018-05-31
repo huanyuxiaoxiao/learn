@@ -22,11 +22,11 @@ import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 @Slf4j
 @Configuration
 public class ResultFilter extends ZuulFilter {
+    private static String STATIC_MATCH = ".*(\\.css|\\.js|\\.html|\\.jsp)$";
     @Value("${spring.profiles.active}")
     private String profiles;
     @Value("#{'${pass.url}'.split(',')}")
     private List<String> passUrl;
-    private static String STATIC_MATCH =".*(\\.css|\\.js|\\.html|\\.jsp)$";
 
     /**
      * to classify a filter by type. Standard types in Zuul are "pre" for pre-routing filtering,
@@ -64,12 +64,12 @@ public class ResultFilter extends ZuulFilter {
     }
 
     private boolean checkInPassUrl(String requestURL) {
-        if(requestURL.matches(STATIC_MATCH)){
+        if (requestURL.matches(STATIC_MATCH)) {
             return false;
         }
         for (String urlKey : passUrl) {
-            if (requestURL.indexOf(urlKey)!=-1) {
-                log.debug("当前请求地址:"+requestURL+"匹配忽略关键字:"+urlKey);
+            if (requestURL.indexOf(urlKey) != - 1) {
+                log.debug("当前请求地址:" + requestURL + "匹配忽略关键字:" + urlKey);
                 return false;
             }
         }
