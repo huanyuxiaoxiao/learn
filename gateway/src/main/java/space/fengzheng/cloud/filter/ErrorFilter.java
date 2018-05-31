@@ -1,17 +1,13 @@
 package space.fengzheng.cloud.filter;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.Response;
-import org.apache.catalina.connector.ResponseFacade;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import space.fengzheng.cloud.contract.CommonContract;
-import space.fengzheng.cloud.exception.PromptException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -71,19 +67,13 @@ public class ErrorFilter extends ZuulFilter {
         final HttpServletResponse response = ctx.getResponse();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
-        PrintWriter out = null;
-        JSONObject result=new JSONObject();
-        result.put("code",CommonContract.NET_WORK_ERROR);
-        result.put("msg","系统繁忙");
-        try {
-            out = response.getWriter();
+        JSONObject result = new JSONObject();
+        result.put("code", CommonContract.NET_WORK_ERROR);
+        result.put("msg", "系统繁忙");
+        try (PrintWriter out = response.getWriter()) {
             out.append(result.toJSONString());
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                out.close();
-            }
+            log.error("请求结果回写异常:" + e.getLocalizedMessage(), e);
         }
         return null;
     }

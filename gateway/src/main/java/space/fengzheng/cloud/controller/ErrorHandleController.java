@@ -23,9 +23,9 @@ public class ErrorHandleController implements ErrorController {
     }
 
     @RequestMapping("/error")
-    public Serializable error(HttpServletRequest request, HttpServletResponse response) {
+    public Serializable error(HttpServletRequest request, HttpServletResponse response,Exception e) {
         if (Objects.equals(response.getStatus(), HttpStatus.NOT_FOUND.value())) {
-            log.warn("下游业务系统未上线,中断请求");
+            log.warn("下游业务系统未上线,中断请求:"+request.getRequestURI(),e);
         }else{
             log.warn("原请求状态码:" + response.getStatus());
         }
